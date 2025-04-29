@@ -125,6 +125,5 @@ def customize_lesson_plan_route():
         return jsonify({'error': 'An unexpected error occurred while customizing the lesson plan. Please try again.'}), 500
 
 if __name__ == '__main__':
-    # Adjust host/port if needed. 0.0.0.0 is typical for container deployments.
-    # In production, disable debug mode and set a stable secret key.
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    from waitress import serve
+    serve(app, host='0.0.0.0', port=5000)
