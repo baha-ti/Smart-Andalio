@@ -92,7 +92,7 @@ def generate_interdisciplinary_lesson_plan(main_learningactivity, grade_level, l
             }}
         ],
         "Remarks": [
-            "Students were able to [what they were able to do] in relation to the specific activities enacted due to [provide reasons that enabled them to achieve e.g the use of interactive teachi[...]
+            "Students were able to [what they were able to do] in relation to the specific activities enacted due to [provide reasons that enabled them to achieve e.g the use of interactive teaching and learning methods, and resources]. However, some students failed [If some students did not achieve the competences] to [list specific areas which were challenging]. Therefore, I will [provide mechanisms you will use to help these students e.g clarify it next period by using more examples.]"
         ]
     }}
     """
