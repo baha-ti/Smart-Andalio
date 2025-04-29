@@ -1,0 +1,36 @@
+{
+  "hosting": {
+    "public": "static",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "app"
+      }
+    ]
+  },
+  "functions": {
+    "source": ".",
+    "runtime": "python310",
+    "pythonPath": "E:\\AI Agents\\Lessonplan\\venv\\Scripts\\python.exe"
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001,
+      "host": "127.0.0.1"
+    },
+    "hosting": {
+      "port": 5000,
+      "host": "127.0.0.1"
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000,
+      "host": "127.0.0.1"
+    }
+  }
+} 

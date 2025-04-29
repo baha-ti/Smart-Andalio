@@ -1,0 +1,87 @@
+[debug] [2025-04-18T16:51:35.643Z] ----------------------------------------------------------------------
+[debug] [2025-04-18T16:51:35.647Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\alber\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2025-04-18T16:51:35.647Z] CLI Version:   14.2.0
+[debug] [2025-04-18T16:51:35.648Z] Platform:      win32
+[debug] [2025-04-18T16:51:35.648Z] Node Version:  v22.14.0
+[debug] [2025-04-18T16:51:35.648Z] Time:          Sat Apr 19 2025 00:51:35 GMT+0800 (China Standard Time)
+[debug] [2025-04-18T16:51:35.648Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-04-18T16:51:36.123Z] Object "/functions" in "firebase.json" has unknown property: {"additionalProperty":"pythonPath"}
+[debug] [2025-04-18T16:51:36.124Z] Field "/functions" in "firebase.json" is possibly invalid: must be array
+[debug] [2025-04-18T16:51:36.124Z] Field "/functions" in "firebase.json" is possibly invalid: must match a schema in anyOf
+[debug] [2025-04-18T16:51:36.131Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-04-18T16:51:36.132Z] > authorizing via signed-in user (luckpaul.kissima@gmail.com)
+[info] i  emulators: Starting emulators: functions, hosting, extensions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions, hosting, extensions"}}
+[debug] [2025-04-18T16:51:36.140Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:36.140Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:36.141Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/smart-lesson-plan [none]
+[debug] [2025-04-18T16:51:43.054Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/smart-lesson-plan 200
+[debug] [2025-04-18T16:51:43.054Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/smart-lesson-plan {"projectNumber":"305332946831","projectId":"smart-lesson-plan","lifecycleState":"ACTIVE","name":"Smart Lesson Plan","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-04-18T15:29:54.408434Z"}
+[debug] [2025-04-18T16:51:43.072Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-18T16:51:43.073Z] assigned listening specs for emulators {"user":{"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5000}],"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2025-04-18T16:51:43.081Z] [hub] writing locator at C:\Users\alber\AppData\Local\Temp\hub-smart-lesson-plan.json
+[debug] [2025-04-18T16:51:43.094Z] [Extensions] Started Extensions emulator, this is a noop.
+[debug] [2025-04-18T16:51:43.102Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-18T16:51:43.102Z] [tasks] Cloud Tasks Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-04-18T16:51:43.103Z] late-assigned ports for functions and eventarc emulators {"user":{"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":5000}],"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}],"tasks":[{"address":"127.0.0.1","family":"IPv4","port":9499}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: apphosting, auth, firestore, database, pubsub, storage, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mapphosting, auth, firestore, database, pubsub, storage, dataconnect\u001b[22m"}}
+[debug] [2025-04-18T16:51:43.131Z] defaultcredentials: writing to file C:\Users\alber\AppData\Roaming\firebase\luckpaul_kissima_gmail.com_application_default_credentials.json
+[debug] [2025-04-18T16:51:43.133Z] Setting GAC to C:\Users\alber\AppData\Roaming\firebase\luckpaul_kissima_gmail.com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\alber\\AppData\\Roaming\\firebase\\luckpaul_kissima_gmail.com_application_default_credentials.json"}}
+[debug] [2025-04-18T16:51:43.133Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:43.133Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:43.133Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/smart-lesson-plan/adminSdkConfig [none]
+[debug] [2025-04-18T16:51:48.061Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/smart-lesson-plan/adminSdkConfig 200
+[debug] [2025-04-18T16:51:48.061Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/smart-lesson-plan/adminSdkConfig {"projectId":"smart-lesson-plan","storageBucket":"smart-lesson-plan.firebasestorage.app"}
+[debug] [2025-04-18T16:51:48.093Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:48.093Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:48.093Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/smart-lesson-plan/sites 
+[debug] [2025-04-18T16:51:50.977Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/smart-lesson-plan/sites 200
+[debug] [2025-04-18T16:51:50.977Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/smart-lesson-plan/sites {"sites":[{"name":"projects/smart-lesson-plan/sites/smart-lesson-plan","defaultUrl":"https://smart-lesson-plan.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2025-04-18T16:51:50.977Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:50.977Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:50.977Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/smart-lesson-plan/webApps/-/config [none]
+[debug] [2025-04-18T16:51:51.548Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/smart-lesson-plan/webApps/-/config 200
+[debug] [2025-04-18T16:51:51.548Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/smart-lesson-plan/webApps/-/config {"projectId":"smart-lesson-plan","storageBucket":"smart-lesson-plan.firebasestorage.app","apiKey":"AIzaSyCGTbgKPwLRwmAU7npMl4XGhKsrWXw_ZtU","authDomain":"smart-lesson-plan.firebaseapp.com","messagingSenderId":"305332946831"}
+[debug] [2025-04-18T16:51:51.559Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:51.560Z] Checked if tokens are valid: true, expires at: 1744996755426
+[debug] [2025-04-18T16:51:51.560Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/smart-lesson-plan [none]
+[debug] [2025-04-18T16:51:52.022Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/smart-lesson-plan 200
+[debug] [2025-04-18T16:51:52.022Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/smart-lesson-plan {"projectId":"smart-lesson-plan","projectNumber":"305332946831","displayName":"Smart Lesson Plan","name":"projects/smart-lesson-plan","resources":{"hostingSite":"smart-lesson-plan"},"state":"ACTIVE","etag":"1_4e8c0d44-9dc6-4872-841d-175b850d3e5a"}
+[info] i  hosting[smart-lesson-plan]: Serving hosting files from: static {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mstatic\u001b[22m"}}
+[info] +  hosting[smart-lesson-plan]: Local server: http://127.0.0.1:5000 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:5000\u001b[22m\u001b[24m"}}
+[debug] [2025-04-18T16:51:52.051Z] [Extensions] Connecting Extensions emulator, this is a noop.
+[info] i  functions: Watching "E:\AI Agents\Lessonplan" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"E:\\AI Agents\\Lessonplan\" for Cloud Functions..."}}
+[debug] [2025-04-18T16:51:52.059Z] Customer code is not Node
+[debug] [2025-04-18T16:51:52.060Z] Validating python source
+[debug] [2025-04-18T16:51:52.060Z] Building python source
+[info] i  functions: Loaded environment variables from .env. 
+[debug] [2025-04-18T16:51:52.064Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-04-18T16:51:52.082Z] Running command with virtualenv: command="E:\AI Agents\Lessonplan\venv\Scripts\activate.bat", args=["","&&","python.exe","-c","\"import firebase_functions; import os; print(os.path.dirname(firebase_functions.__file__))\""]
+[debug] [2025-04-18T16:51:52.286Z] stderr: Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'firebase_functions'
+
+[error] !!  functions: Failed to load function definition from source: Error: spawn "E:\AI Agents\Lessonplan\venv\Scripts\activate.bat" ENOENT {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: Error: spawn \"E:\\AI Agents\\Lessonplan\\venv\\Scripts\\activate.bat\" ENOENT"}}
+[debug] [2025-04-18T16:51:52.307Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────┬────────────────┬──────────────────────────────────┐
+│ Emulator   │ Host:Port      │ View in Emulator UI              │
+├────────────┼────────────────┼──────────────────────────────────┤
+│ Functions  │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions  │
+├────────────┼────────────────┼──────────────────────────────────┤
+│ Hosting    │ 127.0.0.1:5000 │ n/a                              │
+├────────────┼────────────────┼──────────────────────────────────┤
+│ Extensions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/extensions │
+└────────────┴────────────────┴──────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500
+┌─────────────────────────┬───────────────┬─────────────────────┐
+│ Extension Instance Name │ Extension Ref │ View in Emulator UI │
+└─────────────────────────┴───────────────┴─────────────────────┘
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
