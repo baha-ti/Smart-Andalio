@@ -1,4 +1,4 @@
-import openai  # Correct import for the OpenAI library
+import requests  # Assuming the deepseek API is accessed via HTTP requests
 import os
 import json
 from dotenv import load_dotenv
@@ -7,15 +7,18 @@ import re
 # Load environment variables
 load_dotenv()
 
-# Initialize OpenAI API key
-api_key = os.getenv('OPENAI_API_KEY')
+# Initialize deepseek API key
+api_key = os.getenv('DEEPSEEK_API_KEY')  # Replace with the correct key for the deepseek API
 if not api_key:
-    raise ValueError("OpenAI API key not found in environment variables")
+    raise ValueError("Deepseek API key not found in environment variables")
 
-# Set the OpenAI API key
-openai.api_key = api_key
+# Define the base URL for the deepseek API
+DEEPSEEK_API_URL = "https://api.deepseek.com/v1"  # Replace with the correct deepseek API endpoint
 
 def generate_interdisciplinary_lesson_plan(main_learningactivity, grade_level, lesson_duration, time_distribution):
+    """
+    Generates an interdisciplinary lesson plan using the deepseek API.
+    """
     prompt = f"""
     Create a detailed interdisciplinary lesson plan strictly adhering to these standards:
 
@@ -89,25 +92,34 @@ def generate_interdisciplinary_lesson_plan(main_learningactivity, grade_level, l
             }}
         ],
         "Remarks": [
-            "Students were able to [what they were able to do] in relation to the specific activities enacted due to [provide reasons that enabled them to achieve e.g the use of interactive teaching and learning methods, and resources]. However, some students failed [If some students did not achieve the competences] to [list specific areas which were challenging]. Therefore, I will [provide mechanisms you will use to help these students e.g clarify it next period by using more examples.]"
+            "Students were able to [what they were able to do] in relation to the specific activities enacted due to [provide reasons that enabled them to achieve e.g the use of interactive teachi[...]
         ]
     }}
     """
 
-    # Call the OpenAI API
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "You are a professional interdisciplinary lesson planner."},
-            {"role": "user", "content": prompt}
-        ],
-        temperature=0.7,
-        max_tokens=2000
-    )
+    # Prepare the request payload for the deepseek API
+    payload = {
+        "model": "r1",  # Assuming "r1" is the correct model for deepseek
+        "prompt": prompt,
+        "temperature": 0.7,
+        "max_tokens": 2000
+    }
 
-    response_text = response.choices[0].message.content.strip()
-    response_text = response_text.replace("```json", "").replace("```", "").strip()
+    # Make the API request
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    response = requests.post(f"{DEEPSEEK_API_URL}/generate", headers=headers, json=payload)
 
+    # Check for a successful response
+    if response.status_code != 200:
+        raise ValueError(f"Deepseek API request failed with status code {response.status_code}: {response.text}")
+
+    # Parse the response JSON
+    response_text = response.json().get("choices", [{}])[0].get("text", "").strip()
+
+    # Clean up and validate the JSON response
     try:
         lesson_plan = json.loads(response_text)
     except json.JSONDecodeError:
