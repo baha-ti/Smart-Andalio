@@ -134,3 +134,27 @@ Return valid JSON only. Do not include any extra text."""
             "error": "An unexpected error occurred while generating the lesson plan.",
             "details": str(e)
         }
+
+def customize_lesson_plan(current_lesson_plan, customization, lesson_type=None):
+    """
+    Customize the provided lesson plan based on the customization instructions.
+    
+    :param current_lesson_plan: The existing lesson plan to be customized.
+    :param customization: A dictionary of customization instructions.
+    :param lesson_type: Optional; the type of lesson (e.g., 'regular', 'interdisciplinary').
+    :return: The customized lesson plan.
+    """
+    try:
+        # Example customization logic
+        for key, value in customization.items():
+            if key in current_lesson_plan:
+                current_lesson_plan[key] = value
+
+        # Optionally handle lesson_type-specific customization
+        if lesson_type:
+            current_lesson_plan['lesson_type'] = lesson_type
+
+        return current_lesson_plan
+
+    except Exception as e:
+        raise ValueError(f"Error customizing the lesson plan: {str(e)}")
