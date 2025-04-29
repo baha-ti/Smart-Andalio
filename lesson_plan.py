@@ -82,145 +82,90 @@ def generate_lesson_plan(main_learningactivity, grade_level, lesson_duration, ti
             return generate_interdisciplinary_lesson_plan(main_learningactivity, grade_level, lesson_duration, time_distribution)
 
         # Create prompt for the OpenAI API
-        prompt = f"""Create a detailed lesson plan for the following specifications:
+       prompt = f"""Create a detailed lesson plan for the following specifications:
 
-        Main Learning Activity: {main_learningactivity}
-        Grade Level: {grade_level}
-        Lesson Duration: {lesson_duration} minutes
-        Lesson Type: {lesson_type}
+Main Learning Activity: {main_learningactivity}
+Grade Level: {grade_level}
+Lesson Duration: {lesson_duration} minutes
+Lesson Type: {lesson_type}
 
-        Time Distribution:
-        - Introduction: {time_distribution['introduction']} minutes
-        - Competence Development: {time_distribution['competence_development']} minutes
-        - Design: {time_distribution['design']} minutes
-        - Realisation: {time_distribution['realisation']} minutes
+Time Distribution:
+- Introduction: {time_distribution['introduction']} minutes
+- Competence Development: {time_distribution['competence_development']} minutes
+- Design: {time_distribution['design']} minutes
+- Realisation: {time_distribution['realisation']} minutes
 
-        CRITICAL INSTRUCTIONS FOR LESSON TYPE: {lesson_type.upper()}
+CRITICAL INSTRUCTIONS FOR LESSON TYPE: {lesson_type.upper()}
 
-        {f'''
-        REGULAR LESSON REQUIREMENTS:
-        1. Adherence to Existing Conditions:
-           - Strictly follow all existing lesson plan conditions
-           - Maintain the provided learning activity exactly as specified
-           - Ensure grade-level appropriateness
-           - Follow established lesson plan structure
-           - Adhere to curriculum standards
+{'''
+REGULAR LESSON REQUIREMENTS:
+1. Adherence to Existing Conditions:
+   - Strictly follow all existing lesson plan conditions
+   - Maintain the provided learning activity exactly as specified
+   - Ensure grade-level appropriateness
+   - Follow established lesson plan structure
+   - Adhere to curriculum standards
 
-        2. Single-Discipline Focus:
-           - Maintain content strictly within a single discipline
-           - DO NOT introduce any interdisciplinary elements
-           - Focus on depth of understanding within the specific subject
-           - Develop subject-specific skills and knowledge
+2. Single-Discipline Focus:
+   - Maintain content strictly within a single discipline
+   - DO NOT introduce any interdisciplinary elements
+   - Focus on depth of understanding within the specific subject
+   - Develop subject-specific skills and knowledge
 
-        3. Real-life Examples and Activities:
-           - Integrate relevant real-life examples specific to the discipline
-           - Ensure examples are age-appropriate and contextually relevant
-           - Include practical activities that demonstrate real-world applications
-           - Use examples students can easily relate to
+3. Real-life Examples and Activities:
+   - Integrate relevant real-life examples specific to the discipline
+   - Ensure examples are age-appropriate and contextually relevant
+   - Include practical activities that demonstrate real-world applications
+   - Use examples students can easily relate to
 
-        4. Validation and Adjustment:
-           - Validate that all content strictly matches teacher-provided activity, specified grade level, single-discipline focus
-           - Immediately adjust if the lesson deviates
+4. Validation and Adjustment:
+   - Validate that all content strictly matches teacher-provided activity, specified grade level, single-discipline focus
+   - Immediately adjust if the lesson deviates
 
-        5. Stage-Specific Requirements:
-           - INTRODUCTION:
-             • Engage with discipline-specific content
-             • Use real-world examples
-             • Set clear learning objectives
-           - COMPETENCE DEVELOPMENT:
-             • Develop subject-specific knowledge with guided practice
-           - DESIGN:
-             • Deepen understanding of the subject
-             • Include practice exercises with feedback
-           - REALISATION:
-             • Final tasks that demonstrate subject mastery
-             • Evaluate subject-specific understanding
+5. Stage-Specific Requirements:
+   - INTRODUCTION:
+     • Engage with discipline-specific content
+     • Use real-world examples
+     • Set clear learning objectives
+   - COMPETENCE DEVELOPMENT:
+     • Develop subject-specific knowledge with guided practice
+   - DESIGN:
+     • Deepen understanding of the subject
+     • Include practice exercises with feedback
+   - REALISATION:
+     • Final tasks that demonstrate subject mastery
+     • Evaluate subject-specific understanding
 
-        6. Assessment Criteria Format:
-           - Strictly reflect the tasks students perform
-           - If a student task is to define a function, the criterion is: a function is defined
-           - All in passive present tense, no qualifiers like 'correctly' or 'properly'
+6. Assessment Criteria Format:
+   - Strictly reflect the tasks students perform
+   - If a student task is to define a function, the criterion is: a function is defined
+   - All in passive present tense, no qualifiers like 'correctly' or 'properly'
 
-        7. Return the plan in JSON format with:
-           • \"Main_Learning_Activity\"
-           • \"Specific_Learning_Activities\" with sub-activities
-           • \"Lesson_Plan\" with IDDR + 5E stages
-           • \"Remarks\" as a single list
-        ''' if lesson_type and lesson_type.lower() == 'regular' else ''}
+7. Return the plan in JSON format with:
+   • "Main_Learning_Activity"
+   • "Specific_Learning_Activities" with sub-activities
+   • "Lesson_Plan" with IDDR + 5E stages
+   • "Remarks" as a single list
+''' if lesson_type and lesson_type.lower() == 'regular' else ''}
 
-        {f'''
-        PROJECT-BASED LESSON REQUIREMENTS:
-        1. Design an extended, hands-on project that spans multiple sessions
-        2. Include clear project goals, deliverables, and success criteria
-        3. Incorporate student choice and autonomy
-        4. Focus on problem-solving and critical thinking
-        5. Use rubrics for project assessment
-        6. Real-world applications and connections
-        7. Collaboration and teamwork
-        ''' if lesson_type and lesson_type.lower() == 'project' else ''}
+{'''
+PROJECT-BASED LESSON REQUIREMENTS:
+1. Design an extended, hands-on project that spans multiple sessions
+2. Include clear project goals, deliverables, and success criteria
+3. Incorporate student choice and autonomy
+4. Focus on problem-solving and critical thinking
+5. Use rubrics for project assessment
+6. Real-world applications and connections
+7. Collaboration and teamwork
+''' if lesson_type and lesson_type.lower() == 'project' else ''}
 
-        The lesson plan should follow the IDDR model and 5E's approach:
-        1. Introduction (Engage) - Variation Principle: CONTRAST
-        2. Competence Development (Explore/Explain) - Variation Principle: SEPARATION
-        3. Design (Elaborate) - Variation Principle: GENERALIZATION
-        4. Realisation (Evaluate) - Variation Principle: FUSION
+The lesson plan should follow the IDDR model and 5E's approach:
+1. Introduction (Engage) - Variation Principle: CONTRAST
+2. Competence Development (Explore/Explain) - Variation Principle: SEPARATION
+3. Design (Elaborate) - Variation Principle: GENERALIZATION
+4. Realisation (Evaluate) - Variation Principle: FUSION
 
-        SPECIFIC LEARNING ACTIVITIES AND FEATURES FORMAT:
-        - \"Main Learning Activity\": Must show the user-provided main goal
-        - \"Specific_Learning_Activities\": Break down the main activity into sub-activities with bullet Features
-        Example:
-        \"Specific_Learning_Activities\": {{
-            \"1\": {{
-                \"Activity\": \"Identify Number Positions\",
-                \"Features\": [
-                    \"Locate positions of digits\",
-                    \"Name each place value\"
-                ]
-            }},
-            \"2\": {{
-                \"Activity\": \"Represent Values\",
-                \"Features\": [
-                    \"Use base-10 blocks\",
-                    \"Convert representations\"
-                ]
-            }}
-        }}
-
-        \"Lesson_Plan\": [
-            {{
-                \"Stage\": \"Introduction\",
-                \"Time (Minutes)\": \"{time_distribution['introduction']}\",
-                \"Teaching Activities\": \"...\",
-                \"Learning Activities\": \"...\",
-                \"Assessment Criteria\": \"...\",
-                \"Variation Principle\": \"CONTRAST\",
-                \"5E Component\": \"Engage\"
-            }},
-            ...
-        ],
-
-        REMARKS FORMAT:
-        - \"Students were able to [...]. However, some students failed [...]. Therefore, I will [...]\"
-
-        Return the lesson plan in JSON:
-        {{
-            \"Main_Learning_Activity\": \"{main_learningactivity}\",
-            \"Specific_Learning_Activities\": {{
-                \"1\": {{
-                    \"Activity\": \"Activity Title\",
-                    \"Features\": [\"Feature 1\", \"Feature 2\"]
-                }},
-                \"2\": {{
-                    \"Activity\": \"Another Activity Title\",
-                    \"Features\": [\"Feature 1\", \"Feature 2\"]
-                }}
-            }},
-            \"Lesson_Plan\": [...],
-            \"Remarks\": [...]
-        }}
-
-        IMPORTANT: Return valid JSON only. Do not include any extra text.
-        """
+Return valid JSON only. Do not include any extra text."""
         
         # Call the OpenAI API
         response = client.chat.completions.create(
