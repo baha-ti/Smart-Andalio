@@ -45,5 +45,24 @@ def calculate_time_distribution(lesson_duration, grade_level):
     }
     
     # Adjust for certain grade levels
-    if grade_level.lower*
-
+    if grade_level.lower() in ["form1", "form2", "form3"]:
+        # More time for introduction and competence development for younger grades
+        time_distribution["introduction"] *= 1.2
+        time_distribution["competence_development"] *= 1.1
+        time_distribution["design"] *= 0.9
+        time_distribution["realisation"] *= 0.8
+    elif grade_level.lower() in ["form4", "form5", "form6"]:
+        # Balanced distribution for middle grades
+        pass
+    else:
+        # More time for design and realisation for older grades
+        time_distribution["introduction"] *= 0.8
+        time_distribution["competence_development"] *= 0.9
+        time_distribution["design"] *= 1.1
+        time_distribution["realisation"] *= 1.2
+    
+    # Round to nearest minute
+    for stage in time_distribution:
+        time_distribution[stage] = round(time_distribution[stage])
+    
+    return time_distribution
