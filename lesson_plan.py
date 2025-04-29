@@ -200,6 +200,17 @@ Return valid JSON only. Do not include any extra text."""
                     raise ValueError(f"Missing required key in lesson plan: {key}")
             
             return lesson_plan
+
+        except json.JSONDecodeError as e:
+            print(f"JSON decoding error: {e}")
+            return {
+                "error": "Failed to parse the generated lesson plan JSON.",
+                "details": str(e)
+            }
+
         except Exception as e:
-            print(f"Error: {e}")
-            return None
+            print(f"Error generating lesson plan: {e}")
+            return {
+                "error": "An unexpected error occurred while generating the lesson plan.",
+                "details": str(e)
+            }
