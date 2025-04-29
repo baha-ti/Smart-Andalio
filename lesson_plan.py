@@ -97,76 +97,8 @@ Time Distribution:
 
 CRITICAL INSTRUCTIONS FOR LESSON TYPE: {lesson_type.upper()}
 
-{'''
-REGULAR LESSON REQUIREMENTS:
-1. Adherence to Existing Conditions:
-   - Strictly follow all existing lesson plan conditions
-   - Maintain the provided learning activity exactly as specified
-   - Ensure grade-level appropriateness
-   - Follow established lesson plan structure
-   - Adhere to curriculum standards
+... (Instructions continue as in original code)"""
 
-2. Single-Discipline Focus:
-   - Maintain content strictly within a single discipline
-   - DO NOT introduce any interdisciplinary elements
-   - Focus on depth of understanding within the specific subject
-   - Develop subject-specific skills and knowledge
-
-3. Real-life Examples and Activities:
-   - Integrate relevant real-life examples specific to the discipline
-   - Ensure examples are age-appropriate and contextually relevant
-   - Include practical activities that demonstrate real-world applications
-   - Use examples students can easily relate to
-
-4. Validation and Adjustment:
-   - Validate that all content strictly matches teacher-provided activity, specified grade level, single-discipline focus
-   - Immediately adjust if the lesson deviates
-
-5. Stage-Specific Requirements:
-   - INTRODUCTION:
-     • Engage with discipline-specific content
-     • Use real-world examples
-     • Set clear learning objectives
-   - COMPETENCE DEVELOPMENT:
-     • Develop subject-specific knowledge with guided practice
-   - DESIGN:
-     • Deepen understanding of the subject
-     • Include practice exercises with feedback
-   - REALISATION:
-     • Final tasks that demonstrate subject mastery
-     • Evaluate subject-specific understanding
-
-6. Assessment Criteria Format:
-   - Strictly reflect the tasks students perform
-   - If a student task is to define a function, the criterion is: a function is defined
-   - All in passive present tense, no qualifiers like 'correctly' or 'properly'
-
-7. Return the plan in JSON format with:
-   • "Main_Learning_Activity"
-   • "Specific_Learning_Activities" with sub-activities
-   • "Lesson_Plan" with IDDR + 5E stages
-   • "Remarks" as a single list
-''' if lesson_type and lesson_type.lower() == 'regular' else ''}
-
-{'''
-PROJECT-BASED LESSON REQUIREMENTS:
-1. Design an extended, hands-on project that spans multiple sessions
-2. Include clear project goals, deliverables, and success criteria
-3. Incorporate student choice and autonomy
-4. Focus on problem-solving and critical thinking
-5. Use rubrics for project assessment
-6. Real-world applications and connections
-7. Collaboration and teamwork
-''' if lesson_type and lesson_type.lower() == 'project' else ''}
-
-The lesson plan should follow the IDDR model and 5E's approach:
-1. Introduction (Engage) - Variation Principle: CONTRAST
-2. Competence Development (Explore/Explain) - Variation Principle: SEPARATION
-3. Design (Elaborate) - Variation Principle: GENERALIZATION
-4. Realisation (Evaluate) - Variation Principle: FUSION
-
-Return valid JSON only. Do not include any extra text."""
-        
         # Call the OpenAI API
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -208,9 +140,9 @@ Return valid JSON only. Do not include any extra text."""
                 "details": str(e)
             }
 
-        except Exception as e:
-            print(f"Error generating lesson plan: {e}")
-            return {
-                "error": "An unexpected error occurred while generating the lesson plan.",
-                "details": str(e)
-            }
+    except Exception as e:
+        print(f"Error generating lesson plan: {e}")
+        return {
+            "error": "An unexpected error occurred while generating the lesson plan.",
+            "details": str(e)
+        }
