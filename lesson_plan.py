@@ -1,19 +1,20 @@
-import requests  # Assuming the deepseek API is accessed via HTTP requests
 import os
 import json
+import traceback
 from dotenv import load_dotenv
+from openai import OpenAI
 from interdisciplinary_lesson_plan import generate_interdisciplinary_lesson_plan
 
 # Load environment variables
 load_dotenv()
 
-# Initialize deepseek API key
-api_key = os.getenv('DEEPSEEK_API_KEY')  # Replace with the correct key for the deepseek API
+# Get OpenAI API key from environment variable
+api_key = os.getenv('OPENAI_API_KEY')
 if not api_key:
-    raise ValueError("Deepseek API key not found in environment variables")
+    raise ValueError("OpenAI API key not found in environment variables")
 
-# Define the base URL for the deepseek API
-DEEPSEEK_API_URL = "https://api.deepseek.com/v1"  # Replace with the correct deepseek API endpoint
+# Initialize OpenAI client with API key
+client = OpenAI(api_key=api_key)
 
 def calculate_time_distribution(lesson_duration, grade_level):
     """
@@ -68,7 +69,7 @@ def generate_lesson_plan(main_learningactivity, grade_level, lesson_duration, ti
         if lesson_type and lesson_type.lower() == 'interdisciplinary':
             return generate_interdisciplinary_lesson_plan(main_learningactivity, grade_level, lesson_duration, time_distribution)
 
-        # Create prompt for the deepseek API
+        # Create prompt for the API
         prompt = f"""Create a detailed lesson plan for the following specifications:
 
 Main Learning Activity: {main_learningactivity}
@@ -90,35 +91,29 @@ The lesson plan should follow the IDDR model and 5E's approach:
 
 Return valid JSON only. Do not include any extra text."""
 
-        # Prepare the request payload
-        payload = {
-            "model": "r1",  # Assuming "r1" is the correct model for deepseek
-            "prompt": prompt,
-            "temperature": 0.7,
-            "max_tokens": 2000
-        }
-
         # Make the API request
-        headers = {
-            "Authorization": f"Bearer {api_key}",
-            "Content-Type": "application/json"
-        }
-        response = requests.post(f"{DEEPSEEK_API_URL}/generate", headers=headers, json=payload)
+        completion = client.chat.completions.create(
+            model="gpt-4-turbo-preview",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a helpful assistant that creates detailed lesson plans. Always respond with valid JSON."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            temperature=0.7,
+            max_tokens=2000,
+            response_format={ "type": "json_object" }
+        )
 
-        # Check for a successful response
-        if response.status_code != 200:
-            raise ValueError(f"Deepseek API request failed with status code {response.status_code}: {response.text}")
+        # Get the response content
+        response_text = completion.choices[0].message.content.strip()
 
-        # Parse the response JSON
-        response_text = response.json().get("choices", [{}])[0].get("text", "").strip()
-
-        # Clean up and validate the JSON response
-        try:
-            lesson_plan = json.loads(response_text)
-        except json.JSONDecodeError:
-            # Attempt to fix malformed JSON
-            response_text = re.sub(r'(\\w+):', r'"\\1":', response_text.replace("'", '"'))
-            lesson_plan = json.loads(response_text)
+        # Parse the JSON response
+        lesson_plan = json.loads(response_text)
 
         # Validate required keys in the JSON response
         required_keys = ["Main_Learning_Activity", "Specific_Learning_Activities", "Lesson_Plan", "Remarks"]
@@ -128,11 +123,20 @@ Return valid JSON only. Do not include any extra text."""
 
         return lesson_plan
 
+    except json.JSONDecodeError as e:
+        print(f"JSON parsing error: {e}")
+        print(f"Response text: {response_text}")
+        return {
+            "error": "Failed to parse the lesson plan response as JSON.",
+            "details": str(e)
+        }
     except Exception as e:
         print(f"Error generating lesson plan: {e}")
+        print(f"Traceback: {traceback.format_exc()}")
         return {
             "error": "An unexpected error occurred while generating the lesson plan.",
-            "details": str(e)
+            "details": str(e),
+            "traceback": traceback.format_exc()
         }
 
 def customize_lesson_plan(current_lesson_plan, customization, lesson_type=None):
